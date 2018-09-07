@@ -5,11 +5,12 @@ const SocketServer = require('ws').Server;
 const uuid = require('uuid');
 const WebSocket = require('ws');
 
-
-// console.log("uuid", uuid.v4());
-// Set the port to 3001
-let clients = [];
 const PORT = 3001;
+const colors = ["Red", "Blue", "Dark", "Brown"];
+const randomColor = () => {
+  return colors[Math.floor(Math.random() * colors.length)];
+};
+
 
 // Create a new express server
 const server = express()
@@ -20,9 +21,7 @@ const server = express()
 // Create the WebSockets server
 const wss = new SocketServer({ server });
 
-// Set up a callback that will run when a client connects to the server
-// When a client connects they are assigned a socket, represented by
-// the ws parameter in the callback.
+// Define WebSockets Broadcast server
 wss.broadcast = function broadcast(data) {
   wss.clients.forEach(function each(client) {
     if (client.readyState === WebSocket.OPEN) {
@@ -31,13 +30,25 @@ wss.broadcast = function broadcast(data) {
   });
 };
 
+// Set up a callback that will run when a client connects to the server
+// When a client connects they are assigned a socket, represented by
+// the ws parameter in the callback.
 wss.on('connection', (ws) => {
   console.log('Client connected');
+  let newColor = randomColor();
 
   const userOnline = {
     type: "userCountChanged",
     userCount: wss.clients.size
   };
+
+  const colorForUser = {
+    type: "color",
+    color: newColor
+  }
+
+  ws.send(JSON.stringify(colorForUser));
+
   wss.broadcast(JSON.stringify(userOnline));
 
   ws.on('message', function incoming(message) {
@@ -48,8 +59,9 @@ wss.on('connection', (ws) => {
       const newMessage = {
         type: "incomingMessage",
         id: uid,
-        user: messageReceived.user,
-        content: messageReceived.content
+        username: messageReceived.username,
+        content: messageReceived.content,
+        color: messageReceived.color
       }
       wss.broadcast(JSON.stringify(newMessage));
 

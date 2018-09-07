@@ -8,6 +8,7 @@ export default class ChatBar extends Component {
       content: '',
       user: ''
     };
+
     this.onContent    = this.onContent.bind(this);
     this.onPost       = this.onPost.bind(this);
     this.onChangeUser = this.onChangeUser.bind(this);
@@ -30,10 +31,6 @@ export default class ChatBar extends Component {
     if (evt.key === "Enter") {
       evt.preventDefault();
       this.props.onNewMessage(this.state.content);
-      this.setState({
-        user: '',
-        content: ''
-      });
     }
   }
   onUser(evt) {
@@ -49,8 +46,7 @@ export default class ChatBar extends Component {
             <input onChange={ this.onChangeUser } className="chatbar-username" placeholder={ this.props.curUser } type="text" />
           </label>
         </form>
-        <input onKeyPress={ this.onPost } onChange={ this.onContent } className="chatbar-message" placeholder="Type a message and hit ENTER"/>
-
+        <input onKeyPress={ this.onPost } onChange={ this.onContent } className="chatbar-message" placeholder="Type a message and hit ENTER" />
       </footer>
     );
   };
