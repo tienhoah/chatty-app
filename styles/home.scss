@@ -2,7 +2,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 
 h1 {
-  color: tomato;
+  color: DarkOliveGreen;
 }
 
 body {
@@ -14,7 +14,7 @@ body {
 }
 
 .chatbar {
-  background: tomato;
+  background: DarkOliveGreen;
   border-top: 1px solid black;
   bottom: 0;
   display: flex;
@@ -69,7 +69,7 @@ body {
 }
 
 .navbar {
-  background: tomato;
+  background: DarkOliveGreen;
   border-bottom: 1px solid black;
   height: 60px;
   left: 0;
@@ -89,4 +89,10 @@ body {
   line-height: 60px;
   padding: 0 10px;
   text-decoration: none;
+}
+
+.navbar-countUserOnline {
+  float: right;
+  display: block;
+  padding-top: 20px;
 }

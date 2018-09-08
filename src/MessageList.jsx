@@ -6,6 +6,7 @@ export default class MessageList extends Component {
     const messages = this.props.messages.map(message => {
       return <Message key={ message.id } messageInfo={ message } />
     });
+
     return(
       <main className="messages">
         {messages}
