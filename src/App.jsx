@@ -3,9 +3,9 @@ import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
 
 class App extends Component {
-
   constructor(props) {
     super(props);
+
     this.state = {
       loading: true,
       userCount: 0,
@@ -15,6 +15,7 @@ class App extends Component {
       },
       messages: []
     };
+
     this.onNewMessage = this.onNewMessage.bind(this);
     this.onNewUser    = this.onNewUser.bind(this);
     this.socket       = new WebSocket('ws://localhost:3001');
@@ -50,7 +51,7 @@ class App extends Component {
           break;
 
         default:
-          throw new Error(`Unknown event type ${ messageFromServer.type }`);
+          throw new Error(`Unknown event type ${messageFromServer.type}`);
         }
       }
 
@@ -64,10 +65,10 @@ class App extends Component {
     const userPosting = this.state.currentUser.name;
 
     const msg = {
-      type: "postMessage",
+      type    : "postMessage",
       username: userPosting,
-      content: content,
-      color: this.state.currentUser.color
+      content : content,
+      color   : this.state.currentUser.color
     }
     this.socket.send(JSON.stringify(msg));
   }
@@ -79,8 +80,8 @@ class App extends Component {
       name = "Anonymous";
     }
     const msg = {
-      type: "postNotification",
-      content: `${ this.state.currentUser.name } has changeed their name to ${ name }.`
+      type   : "postNotification",
+      content: `${this.state.currentUser.name} has changeed their name to ${name}.`
     }
     this.setState({ currentUser });
     this.socket.send(JSON.stringify(msg));
@@ -97,7 +98,7 @@ class App extends Component {
             <span className="navbar-countUserOnline">{ this.state.userCount } users online</span>
           </nav>
           <MessageList messages={ this.state.messages } />
-          <ChatBar onNewUser={ this.onNewUser } onNewMessage={ this.onNewMessage } curUser={ this.state.currentUser.name }  />
+          <ChatBar onNewUser={ this.onNewUser } onNewMessage={ this.onNewMessage } curUser={ this.state.currentUser.name } />
         </div>
       );
     }

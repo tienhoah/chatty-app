@@ -6,6 +6,7 @@ const WebSocket = require('ws');
 
 const PORT = 3001;
 const colors = ["Red", "Blue", "Dark", "Brown"];
+
 const randomColor = () => {
   return colors[Math.floor(Math.random() * colors.length)];
 };
@@ -34,7 +35,6 @@ wss.broadcast = function broadcast(data) {
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
   console.log('Client connected');
-  let newColor = randomColor();
 
   const userOnline = {
     type: "userCountChanged",
@@ -43,7 +43,7 @@ wss.on('connection', (ws) => {
 
   const colorForUser = {
     type: "color",
-    color: newColor
+    color: randomColor()
   }
 
   ws.send(JSON.stringify(colorForUser));
@@ -52,23 +52,23 @@ wss.on('connection', (ws) => {
 
   ws.on('message', function incoming(message) {
     const uid = uuid.v4();
-    const messageReceived = JSON.parse(message);
+    const messageFromClient = JSON.parse(message);
 
-    if (messageReceived.type === "postMessage") {
+    if (messageFromClient.type === "postMessage") {
       const newMessage = {
-        type: "incomingMessage",
-        id: uid,
-        username: messageReceived.username,
-        content: messageReceived.content,
-        color: messageReceived.color
+        type    : "incomingMessage",
+        id      : uid,
+        username: messageFromClient.username,
+        content : messageFromClient.content,
+        color   : messageFromClient.color
       }
       wss.broadcast(JSON.stringify(newMessage));
 
-    } else if (messageReceived.type === "postNotification") {
+    } else if (messageFromClient.type === "postNotification") {
       const newMessage = {
-        type: "incomingNotification",
-        id: uid,
-        content: messageReceived.content
+        type   : "incomingNotification",
+        id     : uid,
+        content: messageFromClient.content
       }
       wss.broadcast(JSON.stringify(newMessage));
     }
