@@ -8,7 +8,7 @@ A simple chat app built of React, WebSocket, and boiler plate from a minimal and
 - users can send change their name, others in the current chat session will be notified about name changed.
 - users can send image url in the chat message.
 - users will be assigned a random color for names.
-_ the top right corner displays a number of users currently online.
+- the top right corner displays a number of users currently online.
 
 ## Final Products
 !["Sceenshot of Chatty"](https://github.com/tienhoah/chatty-app/blob/master/docs/chatty_app.png)
