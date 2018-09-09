@@ -10,14 +10,14 @@ A simple chat app built of React, WebSocket, and boiler plate from a minimal and
 - users will be assigned a random color for names.
 _ the top right corner displays a number of users currently online.
 
-### Final Products
-!["Sceenshot of Chatty"]()
+## Final Products
+!["Sceenshot of Chatty"](https://github.com/tienhoah/chatty-app/blob/master/docs/chatty_app.png)
 
-### Usage
+## Usage
 
-## Required: 2 terminals open for Chatty, one for application and another for server
+**Required:** 2 terminals open for Chatty, one for application and another for server
 
-1.Install the dependencies and start the application.
+1. Install the dependencies and start the application.
 
 ```
 npm install
@@ -25,13 +25,13 @@ npm start
 open http://localhost:3000
 ```
 
-2.Locate to chatty_server folder and start server.
+2. Locate to chatty_server folder and start server.
 - in current chattApp folder
 ```
 cd chatty_server
 npm start
 ```
-3.Now the Chatty is ready to use.
+3. Now the Chatty is ready to use.
 - Multiple users are supported, just simply open a new browser tab and continue to send messages to each other.
 
 ### Static Files
